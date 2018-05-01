@@ -29,6 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/*/floor1/**").hasRole("USER")
 				.antMatchers("/*/floor2/**").hasRole("ADMIN")
 				.and()
-				.httpBasic();
+				/*.httpBasic()replaced by bb filters*/
+				.addFilter(new JWTAuthenticationFilter(authenticationManager()))
+				.addFilter(new JWTAuthorizationFilter(authenticationManager(), customUserDetailsService));
 		}
 }
